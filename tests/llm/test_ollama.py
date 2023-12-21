@@ -36,3 +36,10 @@ def test_get_answer_mocked_ollama(ollama_llm_config, mocker):
         callback_manager=mocker.ANY  # Use mocker.ANY to ignore the exact instance
     )
     mock_instance.assert_called_once_with(prompt)
+
+def test_ollama_llm_default_model(ollama_llm_config, mocker):
+
+    ollama_llm_config.model = None
+    llm = OllamaLlm(ollama_llm_config)
+    
+    assert llm.config.model == "llama2"
